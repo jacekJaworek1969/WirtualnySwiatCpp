@@ -55,7 +55,7 @@ void Zwierze::kolizja(Organizm* atakujacy) {
 			swiat->dodajOrganizm(getSymbol(), x1,  y1);	
 			swiat->komunikat(this, "sie rozmnozyl");	
 		}
-		else swiat->komunikat(this, "nie ma miejsca na rozmnazanie");	
+		//else swiat->komunikat(this, "nie ma miejsca na rozmnazanie");	
 
 
 	}

@@ -2,7 +2,7 @@
 #include "Swiat.h"
 #include "Organizm.h"
 #include "Czlowiek.h"
-#include <conio.h>
+//#include <conio.h>
 using namespace std;
 
 int main() {
@@ -16,6 +16,7 @@ int main() {
 	swiat.dodajCzlowieka(&czlowiek);
 	swiat.ustawSwiat();
 	}
+	
 	if (a == '2') {
 		cout << "podaj nazwe pliku ";
 		string napis;

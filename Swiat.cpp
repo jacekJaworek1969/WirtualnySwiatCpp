@@ -10,6 +10,8 @@
 #include "WilczeJagody.h"
 #include "BarszczSosnowskiego.h"
 #include <fstream>
+#include <Windows.h>
+
 
 Swiat::Swiat(int szerokosc, int wysokosc) {
 	this->szerokosc = szerokosc++; // aby indeksowac od 1 nie od 0
@@ -46,14 +48,63 @@ void Swiat::dodajCzlowieka(Organizm* organizm)
 	mapaOrganizmow[organizm->getX()][organizm->getY()] = organizm;
 	listaOrganizmow.push_back(organizm);
 }
+void color(int color) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+void ustawKolor(char symbol) {
+	switch (symbol)
+	{
+	case 'T':
+		color(10);
+		break;
+	case 'M':
+		color(14);
+		break;
+	case 'G':
+		color(13);
+		break;
+	case 'J':
+		color(12);
+		break;
+	case 'B':
+		color(4);
+		break;
+	case 'X':
+		color(11);
+		break;
+	case 'W':
+		color(8);
+		break;
+	case 'O':
+		color(15);
+		break;
+	case 'Z':
+		color(2);
+		break;
+	case 'L':
+		color(6);
+		break;
+	case 'A':
+		color(6);
+		break;
+	default:
+		color(15);
+		break;
+	}
+}
 std::ostream& operator<<(std::ostream& out, const Swiat& swiat ) {
+	char symbol;
 	out <<"tura: " << swiat.getTura() << std::endl;
-	for (int i = 1; swiat.getWysokosc() >= i; i++) {
-		for (int j = 1; swiat.getSzerokosc() >= j; j++) {
-			//out << " ";
-			if (swiat.getMapaOrganizmow()[j][i] != nullptr)
-				out << swiat.getMapaOrganizmow()[j][i]->getSymbol();
-			else out << "-";
+	for (int i = 0; swiat.getWysokosc()+1 >= i; i++) {
+		for (int j = 0; swiat.getSzerokosc()+1 >= j; j++) {
+			if (i == 0 || j == 0 || i == swiat.getWysokosc() + 1 || j == swiat.getWysokosc() + 1)out << '*';
+			else if (swiat.getMapaOrganizmow()[j][i] != nullptr) {
+				symbol = swiat.getMapaOrganizmow()[j][i]->getSymbol();
+				ustawKolor(symbol);
+				out << symbol;
+				color(15);
+			}
+			else out << " ";
 			out << " ";
 		}
 		out << std::endl;
